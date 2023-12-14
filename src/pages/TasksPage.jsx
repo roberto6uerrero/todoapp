@@ -1,8 +1,7 @@
 import { Grid, Paper, Stack } from "@mui/material";
 import { useTaskContext } from "../context/taskContext";
 import { useEffect } from "react";
-import TableComponent from "../components/TableComponent";
-import { FormCreateTaskComponent } from "../components/FormCreateTaskComponent";
+import { CreateTaskView, ShowTasksView } from "../views";
 
 export const TasksPage = () => {
   const { getTasks, tasks, loading } = useTaskContext();
@@ -19,7 +18,7 @@ export const TasksPage = () => {
           Agregar tarea
         </Button>
         </Box> */}
-        <FormCreateTaskComponent />
+        <CreateTaskView />
         <Stack direction="row" alignItems="center" justifyContent="end" mb={5}>
           {loading ? (
             <Paper
@@ -33,7 +32,7 @@ export const TasksPage = () => {
               Cargando ...
             </Paper>
           ) : (
-            <TableComponent data={tasks} />
+            <ShowTasksView data={tasks} />
           )}
         </Stack>
       </Grid>

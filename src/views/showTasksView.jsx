@@ -6,11 +6,11 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import OptionsRowTable from "./OptionsRowTable";
+import OptionsRowTable from "../components/OptionsRowTable";
 import { Checkbox } from "@mui/material";
 import { useTaskContext } from "../context/taskContext";
 
-const TableComponent = ({ data }) => {
+export const ShowTasksView = ({ data }) => {
   const { updateTask, getTasks } = useTaskContext();
 
   const handleChange = (event, id, state) => {
@@ -73,7 +73,7 @@ const TableComponent = ({ data }) => {
   );
 };
 
-TableComponent.propTypes = {
+ShowTasksView.propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string,
@@ -83,5 +83,3 @@ TableComponent.propTypes = {
     })
   ).isRequired,
 };
-
-export default TableComponent;
