@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { taskSchema } from "../schemas/taskSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import _ from 'lodash';
 
 export const UpdateTaskView = ({ id }) => {
   const { task, getTask, snackbar, updateTask } = useTaskContext();
@@ -31,16 +32,16 @@ export const UpdateTaskView = ({ id }) => {
   }, [task, setValue]);
 
   useEffect(()=> {
-    openSnackbar({
-      state: true,
-      type: "error",
-      message: "Entrada incorrecta, campos invalidos",
-    })
-
+    if(!(_.isEmpty(errors))){
+      openSnackbar({
+        state: true,
+        type: "error",
+        message: "Entrada incorrecta, campos invalidos",
+      })
+    }
   }, [errors])
 
   const onSubmit = (formData) => {
-    console.log("on submit update");
     formData.state = "pending";
     const data = JSON.stringify(formData);
     updateTask(id, data).then((res) => {

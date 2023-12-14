@@ -17,6 +17,7 @@ export const TaskProvider = ({ children }) => {
   const getTask = async (id) => {
     const response = await taskService.getTask(id)
     if(response){
+      localStorage.setItem("tasksStorage", JSON.stringify(response) )
       setTask(response)
       setLoading(false)
       return
@@ -28,17 +29,13 @@ export const TaskProvider = ({ children }) => {
   const getTasks = async () => {
     const response = await taskService.getTasks();
     if (response) {
-      // console.log(JSON.stringify(response))
       const sortedTasks = response.sort((a, b) => {
-        // Si a es "pending" y b es "completed", a debería ir antes que b
         if (a.state === "pending" && b.state === "completed") {
           return -1;
         }
-        // Si b es "pending" y a es "completed", b debería ir antes que a
         if (b.state === "pending" && a.state === "completed") {
           return 1;
         }
-        // Para otras situaciones, no cambia el orden relativo entre a y b
         return 0;
       });
       
@@ -51,7 +48,6 @@ export const TaskProvider = ({ children }) => {
   };
 
   const createTask = async (task) => {
-    console.log("create user context", task)
     const response = await taskService.createTask(task)
     if(response) getTasks()
     return response

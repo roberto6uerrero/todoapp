@@ -4,8 +4,7 @@ import { useEffect } from "react";
 import { CreateTaskView, ShowTasksView } from "../views";
 
 export const TasksPage = () => {
-  const { getTasks, tasks, loading } = useTaskContext();
-
+  const { getTasks, tasks } = useTaskContext();
   useEffect(() => {
     getTasks();
   }, [])
@@ -20,7 +19,7 @@ export const TasksPage = () => {
         </Box> */}
         <CreateTaskView />
         <Stack direction="row" alignItems="center" justifyContent="end" mb={5}>
-          {loading ? (
+          {!tasks ? (
             <Paper
               sx={{
                 p: 2,

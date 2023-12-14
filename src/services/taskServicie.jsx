@@ -16,7 +16,6 @@ const getTasks = async () => {
     const responseData = await response.json()
     return responseData
   } catch (error) {
-    console.log(error)
     console.error('Error en la solicitud', error)
   }
 }
@@ -37,7 +36,6 @@ const getTask = async (id) => {
     const responseData = await response.json()
     return responseData
   } catch (error) {
-    console.log(error)
     console.error('Error en la solicitud', error)
   }
 }
@@ -56,11 +54,8 @@ const createTask = async (task) => {
     if(!response.ok){
       throw new Error(`Errror en la solicitud: ${response.status} ${response.statusText}`)
     }
-    console.log(response)
-    // const responseData = await response.json()
     return response.ok
   } catch (error) {
-    console.log(error)
     console.error('Error en la solicitud', error)
   }
 }
@@ -79,11 +74,8 @@ const updateTask = async (task, id) => {
     if(!response.ok){
       throw new Error(`Errror en la solicitud: ${response.status} ${response.statusText}`)
     }
-    console.log(response)
-    // const responseData = await response.json()
     return response.ok
   } catch (error) {
-    console.log(error)
     console.error('Error en la solicitud', error)
   }
 }
@@ -101,11 +93,9 @@ const deleteTask = async (id) => {
     if(!response.ok){
       throw new Error(`Errror en la solicitud: ${response.status} ${response.statusText}`)
     }
-    console.log(response)
     // const responseData = await response.json()
     return response.ok
   } catch (error) {
-    console.log(error)
     console.error('Error en la solicitud', error)
   }
 }

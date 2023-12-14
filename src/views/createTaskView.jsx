@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { taskSchema } from "../schemas/taskSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
+import _ from 'lodash';
 
 export const CreateTaskView = () => {
   const { createTask, snackbar} = useTaskContext();
@@ -48,15 +49,14 @@ export const CreateTaskView = () => {
   };
 
   useEffect(()=> {
-    openSnackbar({
-      state: true,
-      type: "error",
-      message: "Entrada incorrecta, campos invalidos",
-    })
-
+    if(!(_.isEmpty(errors))){
+      openSnackbar({
+        state: true,
+        type: "error",
+        message: "Entrada incorrecta, campos invalidos",
+      })
+    }
   }, [errors])
-
-  console.log("errors", errors)
 
   return (
     <Box mb={5}>
